@@ -16,7 +16,7 @@ const hbs = exphbs.create({
     runtimeOptions: {
         allowProtoPropertiesByDefault: true,
         allowProtoMethodsByDefault: true
-      }
+    }
 })
 
 app.engine('hbs', hbs.engine)
@@ -36,7 +36,9 @@ const PORT = process.env.PORT || 3000
 async function start() {
     try {
         const url = 'mongodb+srv://Artem_Balanovskyi:QXYrAGkx2L-.5HZ@cluster.w2mzpqy.mongodb.net/shop'
-        await mongoose.connect(url, { useNewUrlParser: true })
+        await mongoose.connect(url, {
+            useNewUrlParser: true
+        })
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`)
         })
