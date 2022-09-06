@@ -9,18 +9,18 @@ document.querySelectorAll('.price').forEach(node => {
     node.textContent = toCurrency(node.textContent)
 })
 
-const $card = document.querySelector('#card')
-if ($card) {
-    $card.addEventListener('click', event => {
+const $cart = document.querySelector('#cart')
+if ($cart) {
+    $cart.addEventListener('click', event => {
         if (event.target.classList.contains('js-remove')) {
             const id = event.target.dataset.id;
 
-            fetch('/card/remove/' + id, {
+            fetch('/cart/remove/' + id, {
                 method: 'delete'
             }).then(res => res.json())
-                .then(card => {
-                    if (card.courses.length) {
-                        const html = card.courses.map(c => {
+                .then(cart => {
+                    if (cart.courses.length) {
+                        const html = cart.courses.map(c => {
                             return `
                         <tr>
             <td>${c.title}</td>
@@ -31,12 +31,12 @@ if ($card) {
         </tr>
                         `
                         }).join('')
-                        $card.querySelector('tbody').innerHTML = html;
-                        console.log($card.querySelector('.price'));
-                        $card.querySelector('.price').textContent = toCurrency(card.price);
+                        $cart.querySelector('tbody').innerHTML = html;
+                        console.log($cart.querySelector('.price'));
+                        $cart.querySelector('.price').textContent = toCurrency(cart.price);
 
                     } else {
-                        $card.innerHTML = '<p>The card is empty</p>'
+                        $cart.innerHTML = '<p>The cart is empty</p>'
                     }
                 })
         }
