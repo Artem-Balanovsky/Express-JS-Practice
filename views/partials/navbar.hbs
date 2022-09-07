@@ -21,12 +21,17 @@
       <li><a href="/add">Add a course</a></li>
       {{/if}}
 
-        {{#if iscart}}
+        {{#if isCart}}
       <li class="active"><a href="/cart">Buy</a></li>
       {{else}}
       <li><a href="/cart">Buy a course</a></li>
       {{/if}}
 
+      {{#if isOrder}}
+      <li class="active"><a href="/orders">Orders</a></li>
+      {{else}}
+      <li><a href="/orders">Orders</a></li>
+      {{/if}}
 
     </ul>
   </div>
