@@ -36,3 +36,11 @@
 .course-form {
     margin-bottom: 2rem;
 }
+
+.auth {
+    padding-top: 1rem;
+}
+
+.auth h1 {
+    text-align: center;
+}
