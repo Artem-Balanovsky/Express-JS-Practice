@@ -15,13 +15,14 @@
       <li><a href="/courses">Courses</a></li>
       {{/if}}
 
+      {{#if isAuth}}
       {{#if isAdd}}
       <li class="active"><a href="/add">Add a course</a></li>
       {{else}}
       <li><a href="/add">Add a course</a></li>
       {{/if}}
 
-        {{#if isCart}}
+      {{#if isCart}}
       <li class="active"><a href="/cart">Buy</a></li>
       {{else}}
       <li><a href="/cart">Buy</a></li>
@@ -33,12 +34,17 @@
       <li><a href="/orders">Orders</a></li>
       {{/if}}
 
-       {{#if isLogin}}
-      <li class="active"><a href="/auth/login">Enter</a></li>
+      <li><a href="/auth/logout">Logout</a></li>
+
+      {{else}}
+
+      {{#if isLogin}}
+      <li class="active"><a href="/auth/login">Login</a></li>
       {{else}}
       <li><a href="/auth/login">Enter</a></li>
       {{/if}}
 
+      {{/if}}
     </ul>
   </div>
 </nav>
