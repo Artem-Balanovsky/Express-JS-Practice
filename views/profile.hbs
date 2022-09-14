@@ -1,0 +1,38 @@
+<h1>Profile</h1>
+
+<div class="row">
+    <div class="col s6">
+        <img class='avatar'
+            src="https://images.vexels.com/media/users/3/145908/raw/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
+            alt="">
+
+        <p>There is no avatar</p>
+    </div>
+
+    <div class="col s6">
+        <form action="/profile" method="POST">
+            <p>Your email: <strong>{{user.email}}</strong></p>
+
+            <div class="input-field ">
+                <input id="name" name="name" type="text" class="validate" required value="{{user.name}}">
+                <label for="name">Your name</label>
+                <span class="helper-text" data-error="Enter your name"></span>
+            </div>
+
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Avatar</span>
+                    <input type="file" name="avatar">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+
+            <input type="hidden" name="_csrf" value="{{csrf}}">
+
+            <button type="submit" class="btn">Change</button>
+
+        </form>
+    </div>
+</div>
