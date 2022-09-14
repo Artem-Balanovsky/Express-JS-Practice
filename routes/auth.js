@@ -64,27 +64,19 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', registerValidators, async (req, res) => {
     try {
-        const { name, email, password, confirm } = req.body
-        const candidate = await User.findOne({ email })
-
+        const { name, email, password } = req.body
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
             req.flash('registerError', errors.array()[0].msg)
             return res.status(422).redirect('/auth/login#register')
         }
-
-        if (candidate) {
-            req.flash('registerError', 'The email has been already used')
-            res.redirect('/auth/login#register')
-        } else {
-            const hashPassword = await bcrypt.hash(password, 10)
-            const user = new User({
-                email, name, password: hashPassword, cart: { items: [] }
-            })
-            await user.save()
-            res.redirect('/auth/login#login')
-            await transporter.sendMail(regEmail(email))
-        }
+        const hashPassword = await bcrypt.hash(password, 10)
+        const user = new User({
+            email, name, password: hashPassword, cart: { items: [] }
+        })
+        await user.save()
+        res.redirect('/auth/login#login')
+        await transporter.sendMail(regEmail(email))
     } catch (e) {
         console.log(e)
     }
@@ -156,10 +148,10 @@ router.post('/password', async (req, res) => {
         const user = await User.findOne({
             _id: req.body.userId,
             resetToken: req.body.token,
-            resetTokenExp: {$gt: Date.now()}
+            resetTokenExp: { $gt: Date.now() }
         })
 
-        if(user) {
+        if (user) {
             user.password = await bcrypt.hash(req.body.password, 10)
             user.resetToken = undefined
             user.resetTokenExp = undefined
@@ -171,7 +163,7 @@ router.post('/password', async (req, res) => {
         }
 
 
-    } catch(e) {
+    } catch (e) {
         console.log(e)
     }
 })
