@@ -31,3 +31,9 @@ exports.registerValidators = [
     .withMessage ('Name shoul consist minimum of 1 symbol')
     .trim()
 ]
+
+exports.courseValidators = [
+    body('title').isLength({min: 3}).withMessage('Minimal length of the title is 3 symbols').trim(),
+    body('price').isNumeric().withMessage('Enter correct price'),
+    body('img', 'Enter the correct URL of the image').isURL()
+]
