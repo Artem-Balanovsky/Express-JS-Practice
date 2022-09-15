@@ -3,6 +3,7 @@ const path = require('path');
 const csrf = require('csurf');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session)
@@ -62,6 +63,15 @@ app.use(session({
 app.use(fileMiddleware.single('avatar'))
 app.use(csrf())
 app.use(flash())
+app.use(
+    helmet.contentSecurityPolicy({
+      useDefaults: true,
+      directives: {
+        "img-src": ["'self'", "https:"],
+        "script-src-elem": ["'self'", "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js", "'unsafe-inline'" ]
+      }
+    })
+  )
 app.use(varMiddleware)
 app.use(userMiddleware)
 
